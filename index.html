@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIT SCHOOL - Système de Gestion Universitaire</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="images/logo.jpg" alt="IIT SCHOOL Logo" class="logo-image">
+                <div class="logo-text">
+                    <h1>IIT SCHOOL</h1>
+                    <p>Institut Ivoirien de Technologie</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                    <p>Directeur de la scolarite</p>
+                    <p>Fabrice.Dia@iit.ci</p>
+                </div>
+                <div class="user-avatar"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-tabs">
+            <button class="nav-tab active" data-tab="dashboard">
+                <i class="fas fa-calendar"></i>
+                Tableau de Bord
+            </button>
+            <button class="nav-tab" data-tab="students">
+                <i class="fas fa-users"></i>
+                Étudiants
+            </button>
+            <button class="nav-tab" data-tab="inscriptions">
+                <i class="fas fa-file-alt"></i>
+                Inscriptions
+            </button>
+            <button class="nav-tab" data-tab="scolarite">
+                <i class="fas fa-credit-card"></i>
+                Scolarité
+            </button>
+            <button class="nav-tab" data-tab="absences">
+                <i class="fas fa-user-times"></i>
+                Absences
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Étudiants Totals</h3>
+                        <p id="total-students">5</p>
+                    </div>
+                    <i class="fas fa-users stat-icon"></i>
+                </div>
+                <div class="stat-card green">
+                    <div class="stat-info">
+                        <h3>Étudiants Actifs</h3>
+                        <p id="active-students">4</p>
+                    </div>
+                    <i class="fas fa-user-check stat-icon"></i>
+                </div>
+                <div class="stat-card yellow">
+                    <div class="stat-info">
+                        <h3>Absences Totales</h3>
+                        <p id="total-absences">14</p>
+                    </div>
+                    <i class="fas fa-user-times stat-icon"></i>
+                </div>
+                <div class="stat-card blue">
+                    <div class="stat-info">
+                        <h3>Total Collecté</h3>
+                        <p id="total-collected">820,000</p>
+                        <p class="stat-currency">FCFA</p>
+                    </div>
+                    <i class="fas fa-credit-card stat-icon"></i>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>Activité Récente</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Utilisateur</th>
+                            <th>Temps</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nouvelle inscription</td>
+                            <td>Mohamed Amine</td>
+                            <td>Il y a 2 heures</td>
+                        </tr>
+                        <tr>
+                            <td>Absence signalée</td>
+                            <td>Sarah Benali</td>
+                            <td>Il y a 4 heures</td>
+                        </tr>
+                        <tr>
+                            <td>Paiement effectué</td>
+                            <td>Omar Khelifi</td>
+                            <td>Hier</td>
+                        </tr>
+                        <tr>
+                            <td>Document téléchargé</td>
+                            <td>Nadia Belhadj</td>
+                            <td>Hier</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Students Tab -->
+        <div id="students" class="tab-content">
+            <div class="table-container">
+                <div class="table-header">
+                    <div class="search-filter">
+                        <div class="search-icon">
+                            <i class="fas fa-search"></i>
+                            <input type="text" class="search-input" id="student-search" placeholder="Rechercher par nom, email ou programme...">
+                        </div>
+                        <select class="filter-select" id="student-status-filter">
+                            <option value="all">Tous les statuts</option>
+                            <option value="actif">Actif</option>
+                            <option value="suspendu">Suspendu</option>
+                            <option value="gradué">Gradué</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary" id="add-student-btn">
+                        <i class="fas fa-plus"></i>
+                        Ajouter Étudiant
+                    </button>
+                </div>
+                <table id="students-table">
+                    <thead>
+                        <tr>
+                            <th>Étudiant</th>
+                            <th>Programme</th>
+                            <th>Scolarité</th>
+                            <th>Absences</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="students-table-body">
+                        <!-- Students will be populated by JavaScript -->
+                    </tbody>
+                </table>
+                <div class="empty-state" id="students-empty" style="display: none;">
+                    <i class="fas fa-users"></i>
+                    <p>Aucun étudiant trouvé</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inscriptions Tab -->
+        <div id="inscriptions" class="tab-content">
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>Gestion des Inscriptions</h3>
+                    <button class="btn-primary" id="add-inscription-btn">
+                        <i class="fas fa-plus"></i>
+                        Nouvelle Inscription
+                    </button>
+                </div>
+                <div class="stats-grid" style="margin-bottom: 1.5rem;">
+                    <div class="stat-card light-red">
+                        <div class="stat-info">
+                            <h3>Étudiants Inscrits</h3>
+                            <p>5</p>
+                        </div>
+                        <i class="fas fa-users stat-icon light-red-icon"></i>
+                    </div>
+                    <div class="stat-card light-green">
+                        <div class="stat-info">
+                            <h3>Actifs</h3>
+                            <p>4</p>
+                        </div>
+                        <i class="fas fa-user-check stat-icon light-green-icon"></i>
+                    </div>
+                    <div class="stat-card light-yellow">
+                        <div class="stat-info">
+                            <h3>Suspendus</h3>
+                            <p>1</p>
+                        </div>
+                        <i class="fas fa-user-times stat-icon light-yellow-icon"></i>
+                    </div>
+                    <div class="stat-card light-blue">
+                        <div class="stat-info">
+                            <h3>Gradués</h3>
+                            <p>0</p>
+                        </div>
+                        <i class="fas fa-graduation-cap stat-icon light-blue-icon"></i>
+                    </div>
+                </div>
+                <div class="students-list" id="inscriptions-list">
+                    <!-- Students list will be populated -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Scolarite Tab -->
+        <div id="scolarite" class="tab-content">
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>Gestion de la Scolarité</h3>
+                </div>
+                <div class="stats-grid" style="margin-bottom: 1.5rem;">
+                    <div class="stat-card light-blue">
+                        <div class="stat-info">
+                            <h3>FCFA Collectés</h3>
+                            <p>820,000</p>
+                        </div>
+                        <i class="fas fa-credit-card stat-icon light-blue-icon"></i>
+                    </div>
+                    <div class="stat-card light-green">
+                        <div class="stat-info">
+                            <h3>Soldes Payés</h3>
+                            <p>2</p>
+                        </div>
+                        <i class="fas fa-check-circle stat-icon light-green-icon"></i>
+                    </div>
+                    <div class="stat-card light-yellow">
+                        <div class="stat-info">
+                            <h3>Soldes Impayés</h3>
+                            <p>3</p>
+                        </div>
+                        <i class="fas fa-exclamation-circle stat-icon light-yellow-icon"></i>
+                    </div>
+                    <div class="stat-card light-red">
+                        <div class="stat-info">
+                            <h3>Paiements Enregistrés</h3>
+                            <p>6</p>
+                        </div>
+                        <i class="fas fa-receipt stat-icon light-red-icon"></i>
+                    </div>
+                </div>
+                <div class="payment-details" id="payment-details">
+                    <!-- Payment details will be populated -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Absences Tab -->
+        <div id="absences" class="tab-content">
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>Gestion des Absences</h3>
+                </div>
+                <div class="absences-content" id="absences-content">
+                    <!-- Absences content will be populated -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <!-- Add Student Modal -->
+    <div class="modal" id="add-student-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ajouter Nouvel Étudiant</h3>
+            </div>
+            <form id="add-student-form">
+                <div class="form-group">
+                    <label for="student-name">Nom Complet</label>
+                    <input type="text" class="form-control" id="student-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="student-email">Email</label>
+                    <input type="email" class="form-control" id="student-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="student-program">Programme</label>
+                    <select class="form-control" id="student-program" required>
+                        <option value="">Sélectionner un programme</option>
+                        <option value="Génie Informatique">Génie Informatique</option>
+                        <option value="Cybersécurité">Cybersécurité</option>
+                        <option value="IA & Machine Learning">IA & Machine Learning</option>
+                        <option value="Data Science">Data Science</option>
+                        <option value="Cloud Computing">Cloud Computing</option>
+                        <option value="Réseaux & Télécoms">Réseaux & Télécoms</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="student-year">Année</label>
+                    <select class="form-control" id="student-year" required>
+                        <option value="1">1ère année</option>
+                        <option value="2">2ème année</option>
+                        <option value="3">3ème année</option>
+                        <option value="4">Master 1</option>
+                        <option value="5">Master 2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="student-total-due">Montant Total Dû (FCFA)</label>
+                    <input type="number" class="form-control" id="student-total-due" required>
+                </div>
+                <div class="form-group">
+                    <label for="student-status">Statut</label>
+                    <select class="form-control" id="student-status" required>
+                        <option value="actif">Actif</option>
+                        <option value="suspendu">Suspendu</option>
+                        <option value="gradué">Gradué</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn-primary">Ajouter Étudiant</button>
+                    <button type="button" class="btn-secondary" id="cancel-add-student">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Absence Modal -->
+    <div class="modal" id="add-absence-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ajouter Absence</h3>
+                <p id="absence-student-name" class="modal-subtitle"></p>
+            </div>
+            <form id="add-absence-form">
+                <div class="form-group">
+                    <label for="absence-count">Nombre d'absences à ajouter</label>
+                    <input type="number" class="form-control" id="absence-count" min="1" value="1" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn-primary">Ajouter Absence</button>
+                    <button type="button" class="btn-secondary" id="cancel-add-absence">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Remove Absence Modal -->
+    <div class="modal" id="remove-absence-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Retirer Absence</h3>
+                <p id="remove-absence-student-name" class="modal-subtitle"></p>
+                <p id="current-absences" class="modal-info"></p>
+            </div>
+            <form id="remove-absence-form">
+                <div class="form-group">
+                    <label for="remove-absence-count">Nombre d'absences à retirer</label>
+                    <input type="number" class="form-control" id="remove-absence-count" min="1" value="1" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn-primary green-btn">Retirer Absence</button>
+                    <button type="button" class="btn-secondary" id="cancel-remove-absence">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Payment Modal -->
+    <div class="modal" id="add-payment-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ajouter Paiement</h3>
+                <p id="payment-student-name" class="modal-subtitle"></p>
+                <p id="payment-due-amount" class="modal-info red-text"></p>
+            </div>
+            <form id="add-payment-form">
+                <div class="form-group">
+                    <label for="payment-amount">Montant du paiement (FCFA)</label>
+                    <input type="number" class="form-control" id="payment-amount" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="payment-description">Description</label>
+                    <input type="text" class="form-control" id="payment-description" placeholder="Ex: Premier versement, Paiement complet, etc." required>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn-primary">Enregistrer Paiement</button>
+                    <button type="button" class="btn-secondary" id="cancel-add-payment">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <footer>
+        <p>&copy; 2025 IIT SCHOOL. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
